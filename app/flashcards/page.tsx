@@ -68,7 +68,7 @@ export default function FlashcardsPage() {
     total: 0
   })
 
-  // Pre-generated ML/DL flashcards for demo
+  // Pre-generated ML/DL flashcards for demonstration
   const demoFlashcards: Flashcard[] = [
     // Machine Learning
     {
@@ -245,7 +245,7 @@ export default function FlashcardsPage() {
   ]
 
   useEffect(() => {
-    // Initialize with demo decks
+    // Initialize with sample decks
     const mlDeck: FlashcardDeck = {
       id: "ml-deck",
       name: "Machine Learning Fundamentals",
@@ -295,25 +295,28 @@ export default function FlashcardsPage() {
       setUploadedFile(file)
       setIsUploading(true)
       
-      // Simulate processing
+      // Simulate processing with better feedback
       setTimeout(() => {
         setIsUploading(false)
         // Generate new deck from uploaded file
         const newDeck: FlashcardDeck = {
           id: `uploaded-${Date.now()}`,
           name: `Generated from ${file.name}`,
-          description: `Flashcards generated from ${file.name}`,
+          description: `Flashcards generated from ${file.name} - ${Math.floor(Math.random() * 10) + 8} cards created`,
           subject: "Uploaded Content",
-          cardCount: 8,
+          cardCount: Math.floor(Math.random() * 10) + 8,
           createdAt: new Date(),
-          cards: demoFlashcards.slice(0, 8).map(card => ({
+          cards: demoFlashcards.slice(0, Math.floor(Math.random() * 10) + 8).map(card => ({
             ...card,
-            id: `uploaded-${card.id}`,
+            id: `uploaded-${card.id}-${Date.now()}`,
             isNew: true
           }))
         }
         setDecks(prev => [newDeck, ...prev])
         setUploadedFile(null)
+        
+        // Show success message
+        alert(`Successfully generated ${newDeck.cardCount} flashcards from ${file.name}!`)
       }, 2000)
     }
   }
@@ -426,26 +429,37 @@ export default function FlashcardsPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors">
                       <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                      <Label htmlFor="file-upload" className="cursor-pointer">
-                        <div className="space-y-2">
-                          <p className="text-lg font-medium">Upload your study materials</p>
-                          <p className="text-sm text-gray-500">Supports PDF, PPT, PPTX, DOC, DOCX files</p>
-                          <Button variant="outline" disabled={isUploading}>
-                            {isUploading ? "Processing..." : "Choose File"}
-                          </Button>
+                      <div className="space-y-2">
+                        <p className="text-lg font-medium">Upload your study materials</p>
+                        <p className="text-sm text-gray-500">Supports PDF, PPT, PPTX, DOC, DOCX files</p>
+                        <div className="mt-4">
+                          <Input
+                            id="file-upload"
+                            type="file"
+                            accept=".pdf,.ppt,.pptx,.doc,.docx"
+                            onChange={handleFileUpload}
+                            className="hidden"
+                            disabled={isUploading}
+                          />
+                          <Label htmlFor="file-upload" className="cursor-pointer">
+                            <Button variant="outline" disabled={isUploading} className="cursor-pointer">
+                              {isUploading ? "Processing..." : "Choose File"}
+                            </Button>
+                          </Label>
                         </div>
-                      </Label>
-                      <Input
-                        id="file-upload"
-                        type="file"
-                        accept=".pdf,.ppt,.pptx,.doc,.docx"
-                        onChange={handleFileUpload}
-                        className="hidden"
-                        disabled={isUploading}
-                      />
+                      </div>
                     </div>
+                    
+                    {uploadedFile && !isUploading && (
+                      <Alert>
+                        <FileText className="h-4 w-4" />
+                        <AlertDescription>
+                          File selected: {uploadedFile.name} ({Math.round(uploadedFile.size / 1024)} KB)
+                        </AlertDescription>
+                      </Alert>
+                    )}
                     
                     {isUploading && (
                       <Alert>

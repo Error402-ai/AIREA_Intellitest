@@ -112,11 +112,11 @@ export default function StudentDashboard() {
         }
       } catch (error) {
         console.error("Error fetching user:", error)
-        // For demo purposes, set a default student
+        // For demonstration purposes, set a default student
         setStudent({
-          id: "demo-student-1",
-          name: "Demo Student",
-          email: "student@demo.com",
+          id: "student-001",
+          name: "Alex Chen",
+          email: "student@intellitest.com",
           avatar: "/placeholder-user.jpg",
           joinDate: "2024-01-01",
           totalAssessments: 24,

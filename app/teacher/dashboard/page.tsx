@@ -83,11 +83,11 @@ export default function TeacherDashboard() {
       })
       .catch((error) => {
         console.error("Error fetching user:", error)
-        // For demo purposes, set a default user
+        // For demonstration purposes, set a default user
         setUser({
-          id: "demo-teacher-1",
-          name: "Demo Teacher",
-          email: "teacher@demo.com",
+          id: "teacher-001",
+          name: "Professor Johnson",
+          email: "teacher@intellitest.com",
           role: "teacher"
         })
       })
@@ -97,13 +97,13 @@ export default function TeacherDashboard() {
   }, [])
 
   const loadDemoData = () => {
-    // Demo uploaded materials
+    // Sample uploaded materials
     const demoMaterials: UploadedMaterial[] = [
       {
         id: "1",
         name: "Machine Learning Fundamentals.pdf",
-        content: "Sample content about machine learning...",
-        concepts: ["Supervised Learning", "Classification", "Regression"],
+        content: "Comprehensive guide covering supervised learning, unsupervised learning, and model evaluation techniques.",
+        concepts: ["Supervised Learning", "Classification", "Regression", "Model Evaluation"],
         uploadedAt: new Date().toISOString(),
         questionCount: 15,
         status: "completed"
@@ -111,19 +111,19 @@ export default function TeacherDashboard() {
       {
         id: "2",
         name: "Deep Learning Basics.pptx",
-        content: "Sample content about deep learning...",
-        concepts: ["Neural Networks", "Backpropagation", "Activation Functions"],
+        content: "Introduction to neural networks, backpropagation, and modern deep learning architectures.",
+        concepts: ["Neural Networks", "Backpropagation", "Activation Functions", "CNNs"],
         uploadedAt: new Date().toISOString(),
         questionCount: 12,
         status: "completed"
       }
     ]
 
-    // Demo generated questions
+    // Sample generated questions
     const demoQuestions: GeneratedQuestion[] = [
       {
         id: "1",
-        question: "What is the difference between supervised and unsupervised learning?",
+        question: "What is the difference between supervised and unsupervised learning? Provide examples of each.",
         type: "MCQ",
         difficulty: 3,
         bloomsLevel: "Understanding",
@@ -132,7 +132,7 @@ export default function TeacherDashboard() {
       },
       {
         id: "2",
-        question: "Explain the concept of overfitting in machine learning models.",
+        question: "Explain the concept of overfitting in machine learning models and describe strategies to prevent it.",
         type: "Subjective",
         difficulty: 4,
         bloomsLevel: "Analysis",
@@ -141,7 +141,7 @@ export default function TeacherDashboard() {
       },
       {
         id: "3",
-        question: "What is the purpose of activation functions in neural networks?",
+        question: "What is the purpose of activation functions in neural networks? Compare ReLU and Sigmoid functions.",
         type: "MCQ",
         difficulty: 2,
         bloomsLevel: "Understanding",

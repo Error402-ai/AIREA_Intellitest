@@ -157,7 +157,7 @@ export function Navigation() {
               </Avatar>
               <div>
                 <p className="text-sm font-medium">{user?.name || 'User'}</p>
-                <p className="text-xs text-gray-500">{isTeacher ? 'Teacher' : 'Student'}</p>
+                <p className="text-xs text-gray-500">{isTeacher ? 'Instructor' : 'Student'}</p>
               </div>
             </div>
             <Button
@@ -197,7 +197,7 @@ export function Navigation() {
               </Avatar>
               <div className="flex-1">
                 <p className="text-sm font-semibold">{user?.name || 'User'}</p>
-                <p className="text-xs text-gray-500">{isTeacher ? 'Teacher' : 'Student'}</p>
+                <p className="text-xs text-gray-500">{isTeacher ? 'Instructor' : 'Student'}</p>
               </div>
               <Badge className="bg-gradient-to-r from-green-600 to-emerald-600 text-white text-xs">
                 <div className="w-2 h-2 bg-white rounded-full mr-1 animate-pulse"></div>

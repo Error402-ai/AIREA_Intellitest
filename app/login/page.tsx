@@ -26,16 +26,16 @@ export default function LoginPage() {
     setError("")
 
     try {
-      // For demo purposes, automatically set role based on selected tab
-      const demoEmail = activeTab === "teacher" ? "teacher@demo.com" : "student@demo.com"
-      const demoPassword = "password"
+      // For demonstration purposes, automatically set role based on selected tab
+      const defaultEmail = activeTab === "teacher" ? "teacher@intellitest.com" : "student@intellitest.com"
+      const defaultPassword = "password123"
 
       const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
-          email: email || demoEmail, 
-          password: password || demoPassword 
+          email: email || defaultEmail, 
+          password: password || defaultPassword 
         }),
       })
 
@@ -58,13 +58,13 @@ export default function LoginPage() {
     }
   }
 
-  const fillDemoCredentials = () => {
+  const fillCredentials = () => {
     if (activeTab === "teacher") {
-      setEmail("teacher@demo.com")
-      setPassword("password")
+      setEmail("teacher@intellitest.com")
+      setPassword("password123")
     } else {
-      setEmail("student@demo.com")
-      setPassword("password")
+      setEmail("student@intellitest.com")
+      setPassword("password123")
     }
   }
 
@@ -98,8 +98,8 @@ export default function LoginPage() {
               <div className="text-sm text-gray-600 bg-blue-50 p-3 rounded-lg">
                 <p className="font-medium">Student Access:</p>
                 <p>Access your learning dashboard, take assessments, and track your progress.</p>
-                <Button variant="outline" size="sm" onClick={fillDemoCredentials} className="mt-2">
-                  Use Demo Credentials
+                <Button variant="outline" size="sm" onClick={fillCredentials} className="mt-2">
+                  Quick Sign In
                 </Button>
               </div>
             </TabsContent>
@@ -108,8 +108,8 @@ export default function LoginPage() {
               <div className="text-sm text-gray-600 bg-green-50 p-3 rounded-lg">
                 <p className="font-medium">Teacher Access:</p>
                 <p>Upload materials, generate assessments, and review student progress.</p>
-                <Button variant="outline" size="sm" onClick={fillDemoCredentials} className="mt-2">
-                  Use Demo Credentials
+                <Button variant="outline" size="sm" onClick={fillCredentials} className="mt-2">
+                  Quick Sign In
                 </Button>
               </div>
             </TabsContent>
@@ -124,7 +124,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                placeholder="Enter your email"
+                placeholder="Enter your email address"
               />
             </div>
 

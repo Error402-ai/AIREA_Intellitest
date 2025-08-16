@@ -18,20 +18,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: validationError.message }, { status: 400 })
     }
 
-    // For demo purposes: accept any email/password combination
-    // Determine role based on email pattern or specific demo emails
+    // For demonstration purposes: accept any email/password combination
+    // Determine role based on email pattern or specific demonstration emails
     let role = "student"
-    let name = "Demo Student"
-    let userId = "demo-student-1"
+    let name = "Student User"
+    let userId = "student-001"
 
     if (email.toLowerCase().includes('teacher') || 
         email.toLowerCase().includes('prof') || 
         email.toLowerCase().includes('dr') ||
         email.toLowerCase().includes('instructor') ||
-        email === "teacher@demo.com") {
+        email === "teacher@intellitest.com") {
       role = "teacher"
-      name = "Demo Teacher"
-      userId = "demo-teacher-1"
+      name = "Professor Johnson"
+      userId = "teacher-001"
+    } else if (email === "student@intellitest.com") {
+      name = "Alex Chen"
+      userId = "student-001"
     }
 
     // Create JWT token with proper expiration
