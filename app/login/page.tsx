@@ -30,21 +30,32 @@ export default function LoginPage() {
       const defaultEmail = activeTab === "teacher" ? "teacher@intellitest.com" : "student@intellitest.com"
       const defaultPassword = "password123"
 
+      // Use the email from the form, or default based on active tab
+      const loginEmail = email || defaultEmail
+      const loginPassword = password || defaultPassword
+
+      console.log("Attempting login with:", { email: loginEmail, activeTab, role: activeTab === "teacher" ? "teacher" : "student" })
+
       const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
-          email: email || defaultEmail, 
-          password: password || defaultPassword 
+          email: loginEmail, 
+          password: loginPassword 
         }),
       })
 
       if (response.ok) {
         const { user } = await response.json()
+        console.log("Login response user:", user)
+        console.log("User role:", user.role)
+        
         // Redirect based on role
         if (user.role === "teacher") {
+          console.log("Redirecting to teacher dashboard")
           router.push("/teacher/dashboard")
         } else {
+          console.log("Redirecting to student dashboard")
           router.push("/student/dashboard")
         }
       } else {

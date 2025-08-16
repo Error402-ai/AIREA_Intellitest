@@ -24,6 +24,8 @@ export async function POST(request: NextRequest) {
     let name = "Student User"
     let userId = "student-001"
 
+    console.log("Login attempt with email:", email)
+
     if (email.toLowerCase().includes('teacher') || 
         email.toLowerCase().includes('prof') || 
         email.toLowerCase().includes('dr') ||
@@ -32,10 +34,16 @@ export async function POST(request: NextRequest) {
       role = "teacher"
       name = "Professor Johnson"
       userId = "teacher-001"
+      console.log("Role determined as teacher")
     } else if (email === "student@intellitest.com") {
       name = "Alex Chen"
       userId = "student-001"
+      console.log("Role determined as student")
+    } else {
+      console.log("Role determined as student (default)")
     }
+
+    console.log("Final role:", role)
 
     // Create JWT token with proper expiration
     const jwtSecret = getJWTSecret()
